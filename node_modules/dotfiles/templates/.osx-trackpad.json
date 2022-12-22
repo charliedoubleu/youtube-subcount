@@ -1,0 +1,12 @@
+[
+    {
+        "checked": true,
+        "name": "Enable bottom right corner to right-click",
+        "value": "trackpad_corner"
+    },
+    {
+        "checked": true,
+        "name": "Enable tap to click",
+        "value": "trackpad_tap"
+    }
+]

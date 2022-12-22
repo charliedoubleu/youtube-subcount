@@ -1,0 +1,7 @@
+[
+    {
+        "checked": false,
+        "name": "Enable prompt when quitting iTerm",
+        "value": "iterm_prompt"
+    }
+]

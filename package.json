@@ -1,0 +1,25 @@
+{
+  "name": "youtube-subcount",
+  "version": "1.0.0",
+  "description": "A youtube subscriber count app with a creative and personable visualization",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/charliedoubleu/youtube-subcount.git"
+  },
+  "author": "charlie weigel and reese gyllenhammer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/charliedoubleu/youtube-subcount/issues"
+  },
+  "homepage": "https://github.com/charliedoubleu/youtube-subcount#readme",
+  "dependencies": {
+    "dotfiles": "^0.8.0",
+    "express": "^4.18.2",
+    "nodemon": "^2.0.20",
+    "path": "^0.12.7"
+  }
+}

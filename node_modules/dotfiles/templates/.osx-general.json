@@ -1,0 +1,97 @@
+[
+    {
+        "checked": true,
+        "name": "Automatically illuminate built-in MacBook keyboard in low light",
+        "value": "general_illuminate"
+    },
+    {
+        "checked": true,
+        "name": "Automatically quit printer app once the print jobs complete",
+        "value": "general_printer"
+    },
+    {
+        "checked": false,
+        "name": "Automatically rearrange Spaces based on most recent use",
+        "value": "general_spaces"
+    },
+    {
+        "checked": true,
+        "name": "Don't create .DS_Store files on network volumes",
+        "value": "general_dstore"
+    },
+    {
+        "checked": false,
+        "name": "Enable natural (Lion-style) scrolling",
+        "value": "general_scroll"
+    },
+    {
+        "checked": false,
+        "name": "Enable auto-correct",
+        "value": "general_autocorrect"
+    },
+    {
+        "checked": true,
+        "name": "Enable Dashboard as an overlay",
+        "value": "general_dashboard"
+    },
+    {
+        "checked": true,
+        "name": "Enable HiDPI display modes (requires restart)",
+        "value": "general_hidpi"
+    },
+    {
+        "checked": true,
+        "name": "Enable icons for hard drives, servers, and removable media on the desktop",
+        "value": "general_icons"
+    },
+    {
+        "checked": true,
+        "name": "Enable metric units",
+        "value": "general_metric"
+    },
+    {
+        "checked": false,
+        "name": "Enable press-and-hold for keys instead of key repeat",
+        "value": "general_repeat"
+    },
+    {
+        "checked": false,
+        "name": "Enable save documents to iCloud",
+        "value": "general_icloud"
+    },
+    {
+        "checked": true,
+        "name": "Enable scroll gesture with the Ctrl (^) modifier key to zoom",
+        "value": "general_zoom"
+    },
+    {
+        "checked": false,
+        "name": "Enable smart dashes, they're annoying when typing code",
+        "value": "general_dashes"
+    },
+    {
+        "checked": false,
+        "name": "Enable smart quotes, they're annoying when typing code",
+        "value": "general_quotes"
+    },
+    {
+        "checked": false,
+        "name": "Enable the \"Are you sure you want to open this application?\" dialog",
+        "value": "general_dialog"
+    },
+    {
+        "checked": false,
+        "name": "Enable the warning before emptying the Trash",
+        "value": "general_trash"
+    },
+    {
+        "checked": false,
+        "name": "Enable the warning when changing a file extension",
+        "value": "general_extension"
+    },
+    {
+        "checked": true,
+        "name": "Follow the keyboard focus while zoomed in",
+        "value": "general_focus"
+    }
+]
