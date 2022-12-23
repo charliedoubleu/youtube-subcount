@@ -9,7 +9,7 @@ unclickedParticles.forEach((particle) => {
 
 async function claimParticleWithHardCodedData(particle) {
     const res = await fetch(
-        'http://localhost:3000/particles/claim-particle',
+        '/particles/claim-particle',
         {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
