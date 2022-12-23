@@ -1,17 +1,14 @@
 const path = require("path");
 const express = require('express');
-const { getHeapCodeStatistics } = require("v8");
 const router = express.Router();
 const firebaseHelper = require(path.join(__dirname, '../helpers/FirebaseHelper'));
-
-async function getYouTubeSubCount() {
-    const response = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${process.env.YOUTUBE_USER}&key=${process.env.YOUTUBE_API_KEY}`);
-    const responseJson = await response.json();
-    return responseJson["items"][0].statistics.subscriberCount;
-}
+const youtubeHelper = require(path.join(__dirname, '../helpers/YoutubeHelper'));
 
 router.get('/', async (req, res) => {
-    const subscriberCount = await getYouTubeSubCount();
+    const subscriberCount = await youtubeHelper.getYouTubeSubCount(
+        process.env.YOUTUBE_API_KEY_REESE,
+        process.env.YOUTUBE_USER_REESE
+    );
     const numberParticlesInDB = await firebaseHelper.getTotalParticleCount();
     const newParticlesToMake = subscriberCount - numberParticlesInDB;
 
@@ -23,8 +20,27 @@ router.get('/', async (req, res) => {
     res.render('particles', {particles: particles});
 });
 
-router.get('/live-demo', async (req, res) => {
-    const subscriberCount = await getYouTubeSubCount();
+router.get('/reese', async (req, res) => {
+    const subscriberCount = await youtubeHelper.getYouTubeSubCount(
+        process.env.YOUTUBE_API_KEY_REESE,
+        process.env.YOUTUBE_USER_REESE
+    );
+    const numberParticlesInDB = await firebaseHelper.getTotalParticleCount();
+    const newParticlesToMake = subscriberCount - numberParticlesInDB;
+
+    if (newParticlesToMake > 0){
+        firebaseHelper.createUnclaimedParticles(newParticlesToMake, subscriberCount);
+    }
+
+    const particles = await firebaseHelper.getAllParticles();
+    res.render('index', {particles: particles});
+});
+
+router.get('/charlie', async (req, res) => {
+    const subscriberCount = await youtubeHelper.getYouTubeSubCount(
+        process.env.YOUTUBE_API_KEY_CHARLIE,
+        process.env.YOUTUBE_USER_CHARLIE
+    );
     const numberParticlesInDB = await firebaseHelper.getTotalParticleCount();
     const newParticlesToMake = subscriberCount - numberParticlesInDB;
 
