@@ -18,8 +18,8 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/claim-particle', (req, res) => {
-    const { firebaseKey } = req.body;
-    console.log(firebaseKey);
+    const { firebaseKey, accessKey, nickname } = req.body;
+    firebaseHelper.claimParticle(firebaseKey, accessKey, nickname);
     return res.status(200).send({status: 'claimed'});
 });
 

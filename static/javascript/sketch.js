@@ -46,7 +46,6 @@ class Particle{
         this.claimed = false;
         this.name = "";
         this.password = "";
-
     }
 
     drawShape(){

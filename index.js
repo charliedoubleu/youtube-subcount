@@ -4,8 +4,6 @@ const express = require('express');
 const app = express();
 const path = require("path");
 const mustacheExpress = require('mustache-express');
-
-// imports written by us
 const particlesRoute = require(path.join(__dirname, 'routes/particles'));
 
 app.set('views', path.join(__dirname, 'views'));

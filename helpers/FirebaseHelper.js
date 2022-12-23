@@ -51,3 +51,12 @@ exports.getAllParticles = async () => {
     });
     return particlesWithKeys;
 }
+
+exports.claimParticle = (particleKey, accessKey, nickname, ) => {
+    // if we are creating unclaimed particles the subscriber count has grown
+    firebaseDB.update(firebaseDB.ref(database, `particles/${particleKey}`), {
+        claimed: true,
+        access_key: accessKey,
+        nickname: nickname
+    });
+}

@@ -14,7 +14,9 @@ async function claimParticleWithHardCodedData(particle) {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
-                firebaseKey: particle.getAttribute(FIREBASE_KEY_ATTRIBUTE)
+                firebaseKey: particle.getAttribute(FIREBASE_KEY_ATTRIBUTE),
+                accessKey: 'password',
+                nickname: 'charlie_auto'
             })
         }
     );
