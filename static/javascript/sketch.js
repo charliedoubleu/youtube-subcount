@@ -20,14 +20,11 @@ function setup() {
                 random(0,255), // color2
                 random(0,255), // color3
                 particle.dataset['fbKey'],
-                particle.dataset['claimed'],
+                particle.dataset['claimed'] === 'true',
                 particle.dataset['nickname']
             )
         )
     });
-    // for(let i = 0; i < NUM_PARTICLES; i++){
-    //     particles.push(new Particle(random(60,window.innerWidth - 60), random(60,window.innerHeight - 60), random(15,35), random(5,10), random(0,255), random(0,255), random(0,255)))
-    // }   
 }
 
 function draw(){
@@ -49,7 +46,7 @@ class Particle{
         color2,
         color3,
         firebaseKey,
-        isClaimed,
+        claimed,
         nickname
     ){
         this.centerX = centerX;
@@ -67,12 +64,14 @@ class Particle{
         this.boundary = false;
 
         this.esc;
-        //name
-        this.button;
-        this.input;
-        //password
-        this.pass;
-        this.claimed = isClaimed;
+        // html elements
+        this.button = createButton("submit");
+        this.input = createInput().attribute('placeholder','name');
+        this.pass = createInput().attribute('placeholder','password');
+        this.esc = createButton("esc");
+        this.claimed = claimed;
+
+        // user submitted
         this.name = nickname;
         this.password = "";
         this.firebaseKey = firebaseKey;
@@ -99,11 +98,7 @@ class Particle{
                     focused = true;
                     this.speedX = 0;
                     this.speedY = 0;
-                    if(!this.esc){
-                        this.esc = createButton("esc");
-                    }else{
-                        this.esc.show();
-                    }
+                    this.esc.show();
                     this.esc.position(this.centerX - this.size, this.centerY - this.size*2);
                     this.esc.mousePressed(() => {
                         focused = false;
@@ -115,31 +110,18 @@ class Particle{
                         this.speedY = random(5,10);
                     })
 
-
                     //unclaimed
                     if(!this.claimed){
                         //name input
-                        if(!this.input){
-                            this.input = createInput().attribute('placeholder','name');
-                        }else{
-                            this.input.show();
-                        }
+                        this.input.show();
                         this.input.position(this.centerX, this.centerY + this.size);
     
                         //pass input
-                        if(!this.pass){
-                            this.pass = createInput().attribute('placeholder','password');
-                        }else{
-                            this.pass.show();
-                        }
+                        this.pass.show();
                         this.pass.position(this.centerX, this.centerY + this.size + 25);
 
                         //submit
-                        if(!this.button){
-                            this.button = createButton("submit");
-                        }else{
-                            this.button.show();
-                        }
+                        this.button.show();
                         this.button.position(this.centerX, this.centerY + this.size + 50);
                         //handle submit 
                         this.button.mousePressed(() => {
@@ -154,7 +136,6 @@ class Particle{
                                 focused = false;
                             }
                         })
-                        
                         
                     //claimed
                     }else{
