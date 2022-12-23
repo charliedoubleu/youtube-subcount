@@ -17,6 +17,20 @@ router.get('/', async (req, res) => {
     res.render('particles', {particles: particles});
 });
 
+router.get('/live-demo', async (req, res) => {
+    // TODO: get this number properly from youtube api based on a key
+    const subscriberCount = 12;
+    const numberParticlesInDB = await firebaseHelper.getTotalParticleCount();
+    const newParticlesToMake = subscriberCount - numberParticlesInDB;
+
+    if (newParticlesToMake > 0){
+        firebaseHelper.createUnclaimedParticles(newParticlesToMake, subscriberCount);
+    }
+
+    const particles = await firebaseHelper.getAllParticles();
+    res.render('index', {particles: particles});
+});
+
 router.post('/claim-particle', (req, res) => {
     const { firebaseKey, accessKey, nickname } = req.body;
     firebaseHelper.claimParticle(firebaseKey, accessKey, nickname);

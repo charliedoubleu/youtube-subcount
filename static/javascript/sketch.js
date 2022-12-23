@@ -1,3 +1,5 @@
+let particleDataObjects = document.querySelectorAll(`[data-is-particle="true"]`);
+
 let particles = [];
 let focused = false;
 
@@ -6,22 +8,50 @@ function setup() {
     frameRate(30);
     createCanvas(window.innerWidth, window.innerHeight);
     background(0);
-    for(let i = 0; i < NUM_PARTICLES; i++){
-        particles.push(new Particle(random(60,window.innerWidth - 60), random(60,window.innerHeight - 60), random(15,35), random(5,10), random(0,255), random(0,255), random(0,255)))
-    }   
+
+    particleDataObjects.forEach((particle) => {
+        particles.push(
+            new Particle(
+                random(60,window.innerWidth - 60), // centerX
+                random(60,window.innerHeight - 60), // centerY
+                random(15,35), // size
+                random(5,10), // speed
+                random(0,255), // color1
+                random(0,255), // color2
+                random(0,255), // color3
+                particle.dataset['fbKey'],
+                particle.dataset['claimed'],
+                particle.dataset['nickname']
+            )
+        )
+    });
+    // for(let i = 0; i < NUM_PARTICLES; i++){
+    //     particles.push(new Particle(random(60,window.innerWidth - 60), random(60,window.innerHeight - 60), random(15,35), random(5,10), random(0,255), random(0,255), random(0,255)))
+    // }   
 }
 
 function draw(){
     background(0, 150);
-    for(let i = 0; i < NUM_PARTICLES; i++){
-        particles[i].drawShape();
-        particles[i].defaultMove();
-        particles[i].checkClick();
-    }
+    particles.forEach((particle) => {
+        particle.drawShape();
+        particle.defaultMove();
+        particle.checkClick();
+    });
 }
 
 class Particle{
-    constructor(centerX, centerY, size, speed, color1, color2, color3){
+    constructor(
+        centerX,
+        centerY,
+        size,
+        speed,
+        color1,
+        color2,
+        color3,
+        firebaseKey,
+        isClaimed,
+        nickname
+    ){
         this.centerX = centerX;
         this.centerY = centerY;
         this.size = size;
@@ -36,16 +66,16 @@ class Particle{
 
         this.boundary = false;
 
-
         this.esc;
         //name
         this.button;
         this.input;
         //password
         this.pass;
-        this.claimed = false;
-        this.name = "";
+        this.claimed = isClaimed;
+        this.name = nickname;
         this.password = "";
+        this.firebaseKey = firebaseKey;
     }
 
     drawShape(){

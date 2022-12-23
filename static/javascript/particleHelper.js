@@ -16,7 +16,7 @@ async function claimParticleWithHardCodedData(particle) {
             body: JSON.stringify({
                 firebaseKey: particle.getAttribute(FIREBASE_KEY_ATTRIBUTE),
                 accessKey: 'password',
-                nickname: 'charlie_auto'
+                nickname: 'REEEESE_AUTO'
             })
         }
     );
