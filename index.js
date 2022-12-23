@@ -14,6 +14,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'mustache');
 app.set("static", path.join(__dirname, "static"));
 app.use('/static', express.static(path.join(__dirname, 'static')))
+app.use(express.json());
 app.engine('mustache', mustacheExpress());
 
 // home view
@@ -33,6 +34,12 @@ app.get('/particles', async (req, res) => {
 
     const particles = await firebaseHelper.getAllParticles();
     res.render('particles', {particles: particles});
+});
+
+app.post('/particles/claim-particle', (req, res) => {
+    const { firebaseKey } = req.body;
+    console.log(firebaseKey);
+    return res.status(200).send({status: 'claimed'});
 });
 
 app.listen(
