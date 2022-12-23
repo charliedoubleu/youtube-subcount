@@ -20,7 +20,7 @@ app.use('/particles', particlesRoute);
 
 // home view
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, "static/html/index.html"));
+    res.render("index");
 });
 
 app.listen(
