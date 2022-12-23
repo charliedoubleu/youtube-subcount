@@ -12,11 +12,13 @@ const firebaseHelper = require(path.join(__dirname, 'helpers/FirebaseHelper'));
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'mustache');
+app.set("static", path.join(__dirname, "static"));
+app.use('/static', express.static(path.join(__dirname, 'static')))
 app.engine('mustache', mustacheExpress());
 
 // home view
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, "views/static/index.html"));
+    res.sendFile(path.join(__dirname, "static/html/index.html"));
 });
 
 app.get('/particles', async (req, res) => {
