@@ -69,6 +69,11 @@ class Particle{
         this.input = createInput().attribute('placeholder','name');
         this.pass = createInput().attribute('placeholder','password');
         this.esc = createButton("esc");
+        this.button.hide();
+        this.input.hide();
+        this.pass.hide();
+        this.esc.hide();
+
         this.claimed = claimed;
 
         // user submitted
@@ -86,7 +91,6 @@ class Particle{
             stroke(0);
             textAlign(CENTER);
             text(this.name, this.centerX, this.centerY - this.size/2);
-            text(this.password, this.centerX, this.centerY - this.size);
         }
     }
 
