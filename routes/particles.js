@@ -1,11 +1,17 @@
 const path = require("path");
 const express = require('express');
+const { getHeapCodeStatistics } = require("v8");
 const router = express.Router();
 const firebaseHelper = require(path.join(__dirname, '../helpers/FirebaseHelper'));
 
+async function getYouTubeSubCount() {
+    const response = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${process.env.YOUTUBE_USER}&key=${process.env.YOUTUBE_API_KEY}`);
+    const responseJson = await response.json();
+    return responseJson["items"][0].statistics.subscriberCount;
+}
+
 router.get('/', async (req, res) => {
-    // TODO: get this number properly from youtube api based on a key
-    const subscriberCount = 12;
+    const subscriberCount = await getYouTubeSubCount();
     const numberParticlesInDB = await firebaseHelper.getTotalParticleCount();
     const newParticlesToMake = subscriberCount - numberParticlesInDB;
 
@@ -18,8 +24,7 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/live-demo', async (req, res) => {
-    // TODO: get this number properly from youtube api based on a key
-    const subscriberCount = 12;
+    const subscriberCount = await getYouTubeSubCount();
     const numberParticlesInDB = await firebaseHelper.getTotalParticleCount();
     const newParticlesToMake = subscriberCount - numberParticlesInDB;
 
