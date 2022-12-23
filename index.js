@@ -4,6 +4,8 @@ const app = express();
 const path = require("path");
 const firebase = require("firebase/app");
 const firebaseDB = require("firebase/database");
+const mustacheExpress = require('mustache-express');
+
 require('dotenv').config()
 
 // set up and initialize firebase
@@ -49,13 +51,27 @@ async function getAllParticles() {
     const particlesSnapshot = await firebaseDB.get(particlesRef, (snapshot) => {
         return snapshot;
     });
-    return particlesSnapshot.val();
+
+    const particlesWithKeys = Object.entries(particlesSnapshot.val()).map((entry) => {
+        let firebaseKey = entry[0];
+        let particleData = entry[1];
+        return {... particleData, key: firebaseKey};
+    });
+    return particlesWithKeys;
 }
 
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'mustache');
+app.engine('mustache', mustacheExpress());
+
 // home view
-app.get('/', async (req, res) => {
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, "views/static/index.html"));
+});
+
+app.get('/particles', async (req, res) => {
     // TODO: get this number properly from youtube api based on a key
-    const subscriberCount = 11;
+    const subscriberCount = 12;
     const numberParticlesInDB = await getTotalParticleCount();
     const newParticlesToMake = subscriberCount - numberParticlesInDB;
 
@@ -64,8 +80,7 @@ app.get('/', async (req, res) => {
     }
 
     const particles = await getAllParticles();
-
-    res.sendFile(path.join(__dirname, "views/static/index.html"));
+    res.render('particles', {particles: particles});
 });
 
 app.listen(
