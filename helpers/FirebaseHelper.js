@@ -15,8 +15,7 @@ const firebaseConfig = {
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 const database = firebaseDB.getDatabase(firebaseApp);
 
-function createUnclaimedParticles(numberOfParticles, subscriberCount) {
-
+exports.createUnclaimedParticles = (numberOfParticles, subscriberCount) => {
     // if we are creating unclaimed particles the subscriber count has grown
     firebaseDB.update(firebaseDB.ref(database, 'metadata/'), {
         total_count_particles: subscriberCount
@@ -31,7 +30,7 @@ function createUnclaimedParticles(numberOfParticles, subscriberCount) {
     }
 }
 
-async function getTotalParticleCount() {
+exports.getTotalParticleCount = async () => {
     const totalCountsRef = firebaseDB.ref(database, 'metadata/total_count_particles');
     const totalCountSnapshot = await firebaseDB.get(totalCountsRef, (snapshot) => {
         return snapshot;
@@ -39,7 +38,7 @@ async function getTotalParticleCount() {
     return totalCountSnapshot.val();
 }
 
-async function getAllParticles() {
+exports.getAllParticles = async () => {
     const particlesRef = firebaseDB.ref(database, 'particles');
     const particlesSnapshot = await firebaseDB.get(particlesRef, (snapshot) => {
         return snapshot;
@@ -51,10 +50,4 @@ async function getAllParticles() {
         return {... particleData, key: firebaseKey};
     });
     return particlesWithKeys;
-}
-
-module.exports = {
-    createUnclaimedParticles: createUnclaimedParticles,
-    getTotalParticleCount: getTotalParticleCount,
-    getAllParticles: getAllParticles
 }

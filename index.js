@@ -8,7 +8,7 @@ const firebaseDB = require("firebase/database");
 const mustacheExpress = require('mustache-express');
 
 // imports written by us
-const firebaseHelper = require(path.join(__dirname, 'helpers/firebaseHelper'));
+const firebaseHelper = require(path.join(__dirname, 'helpers/FirebaseHelper'));
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'mustache');

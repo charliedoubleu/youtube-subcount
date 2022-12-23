@@ -1,6 +1,25 @@
 <h1> uhhh particles? </h1>
 <ul>
     {{#particles}}
-        <li>key: {{key}}, access_key:{{access_key}}, claimed:{{claimed}}, nickname:{{nickname}}</li>
+        {{#claimed}}
+            <li
+                particle
+                data-fb-key="{{key}}"
+                data-access-key="{{access_key}}"
+                data-claimed="{{claimed}}"
+                data-nickname="{{nickname}}"
+            >
+                nickname: {{nickname}}
+            </li>
+        {{/claimed}}
+        {{^claimed}}
+            <li
+                particle
+                data-fb-key="{{key}}"
+                data-claimed="{{claimed}}"
+            >
+                unclaimed
+            </li>
+        {{/claimed}}
     {{/particles}}
 </ul>
