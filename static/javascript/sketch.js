@@ -134,9 +134,14 @@ class Particle{
                                 this.pass.remove();
                                 this.esc.hide();
                                 focused = false;
+                                claimParticleWithHardCodedData(
+                                    this.firebaseKey,
+                                    this.password,
+                                    this.name,
+                                );
                             }
                         })
-                        
+
                     //claimed
                     }else{
                         
