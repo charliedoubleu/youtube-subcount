@@ -1,4 +1,4 @@
-async function claimParticleWithHardCodedData(
+async function postClaimedParticle(
     firebaseKey,
     accessKey,
     nickname,
