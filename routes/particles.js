@@ -20,7 +20,7 @@ router.get('/reese', async (req, res) => {
     res.render('index', {particles: particles});
 });
 
-router.get('/charlie-says', async (req, res) => {
+router.get('/charlie', async (req, res) => {
     const subscriberCount = await yth.getYouTubeSubCount(
         process.env.YOUTUBE_API_KEY_CHARLIE,
         process.env.YOUTUBE_USER_CHARLIE
