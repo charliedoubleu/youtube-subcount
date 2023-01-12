@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/css/styles.css">
-    <title>Subscriber Count</title>
+    <title>Sub Particles</title>
 </head>
 <body>
     {{#particles}}
@@ -18,7 +18,17 @@
             class="noshow"
         ></div>
     {{/particles}}
-    <a href="#about">about</a>
+
+    <a href="/" class="nav">home</a>
+    <h1>Sub Particles</h1>
+    <p>is a way to create a virtual community for a YouTube channel's fanbase. Every channel's particle system is populated with the same number of particles as channel subscribers. Particles can be claimed by fans and given a custom name. If there are no unclaimed particles in the system then a new one can be spawned by subscribing to the YouTube channel. Created by <a href="https://www.youtube.com/@ranchgod3752" class="link" target="_blank">Reese</a> and <a href="https://www.youtube.com/@charlieuu" class="link" target="_blank">Charlie</a>.
+    </p>
+    <h2>Systems:</h2>
+    <div class="grid">
+        <a href="/particles/reese" onclick="changeDB('reese')" class="button">Reese's Particles</a>
+        <a href="/particles/charlie" onclick="changeDB('charlie')" class="button">Charlie's Particles</a>
+    </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.min.js"></script>
     <script src="../static/javascript/PostClaimParticle.js"></script>
     <script src="../static/javascript/MainCanvas.js"></script>

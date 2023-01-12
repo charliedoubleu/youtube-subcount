@@ -3,6 +3,11 @@ let particleDataObjects = document.querySelectorAll(`[data-is-particle="true"]`)
 let particles = [];
 let particleBeingFocused = false;
 
+let currentDB;
+changeDB = (channelName) => {
+    localStorage.setItem('changeDB', channelName);
+}
+
 function setup() {
     frameRate(30);
     createCanvas(window.innerWidth, window.innerHeight);
@@ -117,10 +122,13 @@ class Particle{
                 particleBeingFocused = false;
 
                 // defined in PostClaimParticle.js
+                
+                currentDB = localStorage.getItem('changeDB');
                 postClaimedParticle(
                     this.firebaseKey,
                     this.password,
                     this.name,
+                    currentDB,
                 );
             }
         });
