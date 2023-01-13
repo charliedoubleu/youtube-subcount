@@ -4,20 +4,23 @@ const router = express.Router();
 const fbh = require(path.join(__dirname, '../helpers/FirebaseHelper'));
 const yth = require(path.join(__dirname, '../helpers/YoutubeHelper'));
 
+const REESE = 'reese';
+const CHARLIE = 'charlie';
+
 router.get('/reese', async (req, res) => {
     const subscriberCount = await yth.getYouTubeSubCount(
         process.env.YOUTUBE_API_KEY_REESE,
         process.env.YOUTUBE_USER_REESE
     );
-    const numberParticlesInDB = await fbh.getTotalParticleCount('reese');
+    const numberParticlesInDB = await fbh.getTotalParticleCount(REESE);
     const newParticlesToMake = subscriberCount - numberParticlesInDB;
 
     if (newParticlesToMake > 0){
-        fbh.createUnclaimedParticles(newParticlesToMake, subscriberCount, 'reese');
+        fbh.createUnclaimedParticles(newParticlesToMake, subscriberCount, REESE);
     }
 
-    const particles = await fbh.getAllParticles('reese');
-    res.render('index', {particles: particles});
+    const particles = await fbh.getAllParticles(REESE);
+    res.render('index', {particles: particles, currentDb: REESE});
 });
 
 router.get('/charlie', async (req, res) => {
@@ -25,15 +28,15 @@ router.get('/charlie', async (req, res) => {
         process.env.YOUTUBE_API_KEY_CHARLIE,
         process.env.YOUTUBE_USER_CHARLIE
     );
-    const numberParticlesInDB = await fbh.getTotalParticleCount('charlie');
+    const numberParticlesInDB = await fbh.getTotalParticleCount(CHARLIE);
     const newParticlesToMake = subscriberCount - numberParticlesInDB;
 
     if (newParticlesToMake > 0){
-        fbh.createUnclaimedParticles(newParticlesToMake, subscriberCount, 'charlie');
+        fbh.createUnclaimedParticles(newParticlesToMake, subscriberCount, CHARLIE);
     }
 
-    const particles = await fbh.getAllParticles('charlie');
-    res.render('index', {particles: particles});
+    const particles = await fbh.getAllParticles(CHARLIE);
+    res.render('index', {particles: particles, currentDb: CHARLIE});
 });
 
 router.post('/claim-particle', (req, res) => {

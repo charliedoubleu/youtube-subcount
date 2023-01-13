@@ -2,9 +2,9 @@ async function postClaimedParticle(
     firebaseKey,
     accessKey,
     nickname,
-    currentDB,
 ) {
-    
+
+    const currentDB = document.getElementById('db-holder').innerText;
     const res = await fetch(
         '/particles/claim-particle',
         {

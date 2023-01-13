@@ -18,7 +18,7 @@ app.use('/particles', particlesRoute);
 
 // home view
 app.get('/', (req, res) => {
-    res.render("index");
+    res.render("home");
 });
 
 app.listen(
