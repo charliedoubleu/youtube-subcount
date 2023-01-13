@@ -15,14 +15,14 @@ const firebaseConfig = {
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 const database = firebaseDB.getDatabase(firebaseApp);
 
-exports.createUnclaimedParticles = (numberOfParticles, subscriberCount) => {
+exports.createUnclaimedParticles = (numberOfParticles, subscriberCount, channelName) => {
     // if we are creating unclaimed particles the subscriber count has grown
     firebaseDB.update(firebaseDB.ref(database, 'metadata/'), {
-        total_count_particles: subscriberCount
+        ['total_count_particles_' + channelName] : subscriberCount
     });
 
     for(var i=0; i < numberOfParticles; i++){
-        firebaseDB.push(firebaseDB.ref(database, 'particles/'), {
+        firebaseDB.push(firebaseDB.ref(database, `particles/${channelName}`), {
             nickname: "",
             claimed: false,
             access_key: ""
@@ -30,16 +30,16 @@ exports.createUnclaimedParticles = (numberOfParticles, subscriberCount) => {
     }
 }
 
-exports.getTotalParticleCount = async () => {
-    const totalCountsRef = firebaseDB.ref(database, 'metadata/total_count_particles');
+exports.getTotalParticleCount = async (channelName) => {
+    const totalCountsRef = firebaseDB.ref(database, `metadata/total_count_particles_${channelName}`);
     const totalCountSnapshot = await firebaseDB.get(totalCountsRef, (snapshot) => {
         return snapshot;
     });
     return totalCountSnapshot.val();
 }
 
-exports.getAllParticles = async () => {
-    const particlesRef = firebaseDB.ref(database, 'particles');
+exports.getAllParticles = async (channelName) => {
+    const particlesRef = firebaseDB.ref(database, `particles/${channelName}`);
     const particlesSnapshot = await firebaseDB.get(particlesRef, (snapshot) => {
         return snapshot;
     });
@@ -52,8 +52,8 @@ exports.getAllParticles = async () => {
     return particlesWithKeys;
 }
 
-exports.claimParticle = (particleKey, accessKey, nickname, ) => {
-    firebaseDB.update(firebaseDB.ref(database, `particles/${particleKey}`), {
+exports.claimParticle = (particleKey, accessKey, nickname, currentDB ) => {
+    firebaseDB.update(firebaseDB.ref(database, `particles/${currentDB}/${particleKey}`), {
         claimed: true,
         access_key: accessKey,
         nickname: nickname

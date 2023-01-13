@@ -3,6 +3,8 @@ async function postClaimedParticle(
     accessKey,
     nickname,
 ) {
+
+    const currentDB = document.getElementById('db-holder').innerText;
     const res = await fetch(
         '/particles/claim-particle',
         {
@@ -11,7 +13,8 @@ async function postClaimedParticle(
             body: JSON.stringify({
                 firebaseKey: firebaseKey,
                 accessKey: accessKey,
-                nickname: nickname
+                nickname: nickname,
+                currentDB: currentDB
             })
         }
     );
